@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <style>
+    	.icon {
+   			position: relative;
+   			right: -295px;
+   			top: -28px;
+		}
+    </style>
+    <title>Regiser</title>
+</head>
+<body class="bg-white vh-100">
+	<div class="container vh-100">
+        <div class="row align-items-center vh-100">
+            <div class="col-lg-4 mx-auto">
+                <div class="bg-white p-5 rounded shadow">
+                <div class="button-box">
+                        <div id="btn" style = "left: 110px"></div>
+                        <button type="button"  id="login-text" class="toggle-btn"
+                            onclick="window.location.href='/final/admin/login'">Login</button>
+                        <button type="button" id="register-text" style="color : #fff" class="toggle-btn">Register</button>
+                    </div>
+                    <!-- Register-->
+                    <form id="register" method="post" th:action="@{/admin/register}" th:object="${user}">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input type="text" th:field="*{username}" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" required  onblur='inputValidation(this)'>
+                            <div id='textField'></div> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <input type="email" th:field="*{email}" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" required maxlength="255" onblur="checkEmail(this.value)">
+                            <div id='emailField'></div> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" th:field="*{password}" class="form-control" id="inputPassword2" required onblur="passValidation2(this.value)">
+                            <i class="icon fas fa-eye" id="show2" onclick="showPassword2()"></i>
+                            <i class="icon fas fa-eye-slash" id="hide2" onclick="showPassword2()" style="display: none;"></i>
+                            <div id='passwordField2'></div> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Repassword</label>
+                            <input type="password" class="form-control" id="inputPassword3" required onblur="checkRepass(this.value)">
+                            <i class="icon fas fa-eye" id="show3" onclick="showPassword3()"></i>
+                            <i class="icon fas fa-eye-slash" id="hide3" onclick="showPassword3()" style="display: none;"></i>
+                            <div id='passwordField3'></div> 
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                            <label class="form-check-label" for="exampleCheck1">I agree to terms and conditions </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 text-uppercase fs-6">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+	<script th:src="@{/js/index.js}"></script>
+    <script th:src="@{/js/validator.js}"></script>
+</body>
+</html>

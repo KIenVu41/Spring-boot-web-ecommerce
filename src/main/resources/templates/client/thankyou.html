@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Box icons -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+<!-- Custom StyleSheet -->
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<title>Thank you</title>
+<style>
+.success {
+	color: #88B04B;
+	font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+	font-weight: 900;
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+
+.success-text {
+	color: #404F5E;
+	font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+	font-size: 20px;
+	margin: 0;
+}
+
+.checkmark {
+	color: #9ABC66;
+	font-size: 100px;
+	line-height: 200px;
+	margin-left: -15px;
+}
+
+.card {
+	background: white;
+	padding: 60px;
+	border-radius: 4px;
+	box-shadow: 0 2px 3px #C8D0D8;
+	display: inline-block;
+	margin: 0 auto;
+}
+</style>
+</head>
+<body>
+	<!-- Navigation -->
+	<div class="top-nav">
+		<div class="container d-flex">
+			<p>Order Online Or Call Us: (001) 2222-55555</p>
+			<ul class="d-flex">
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">FAQ</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="navigation">
+		<div class="nav-center container d-flex">
+			<a href="index.html" class="logo"><h1>Dans</h1></a>
+
+			<ul class="nav-list d-flex">
+				<li class="nav-item"><a th:href="@{/home}" class="nav-link">Home</a></li>
+				<li class="nav-item"><a th:href="@{/product/search}"
+					class="nav-link">Shop</a></li>
+				<li class="nav-item"><a href="#terms" class="nav-link">Terms</a>
+				</li>
+				<li class="nav-item"><a href="#about" class="nav-link">About</a>
+				</li>
+				<li class="nav-item"><a href="#contact" class="nav-link">Contact</a>
+				</li>
+				<li class="icons d-flex"><a href="login.html" class="icon">
+						<i class="bx bx-user"></i>
+				</a>
+					<div class="icon">
+						<i class="bx bx-search"></i>
+					</div>
+					<div class="icon">
+						<i class="bx bx-heart"></i> <span class="d-flex">0</span>
+					</div> <a href="cart.html" class="icon"> <i class="bx bx-cart"></i> <span
+						class="d-flex">0</span>
+				</a></li>
+			</ul>
+
+			<div class="icons d-flex">
+				<a th:href="@{/member/login}" class="icon"> <i class="bx bx-user"></i>
+				</a>
+				<div class="icon">
+					<i class="bx bx-search"></i>
+				</div>
+				<div class="icon">
+					<i class="bx bx-heart"></i> <span class="d-flex">0</span>
+				</div>
+				<a th:href="@{/cart}" class="icon"> <i class="bx bx-cart"></i> <span
+					class="d-flex" th:text= "${session.cartItems} ? ${session.cartItems} : 0"></span>
+				</a>
+			</div>
+
+			<div class="hamburger">
+				<i class="bx bx-menu-alt-left"></i>
+			</div>
+		</div>
+	</div>
+	<div class="container d-flex">
+		<div class="card">
+			<div
+				style="border-radius: 200px; height: 200px; width: 200px; background: #F8FAF5; margin: 0 auto;">
+				<i class="checkmark">✓</i>
+			</div>
+			<h1 class="success">Success</h1>
+			<p class="success-text">
+				We received your purchase request;<br /> we'll be in touch shortly!
+			</p>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="row">
+			<div class="col d-flex">
+				<h4>INFORMATION</h4>
+				<a href="">About us</a> <a href="">Contact Us</a> <a href="">Term
+					& Conditions</a> <a href="">Shipping Guide</a>
+			</div>
+			<div class="col d-flex">
+				<h4>USEFUL LINK</h4>
+				<a href="">Online Store</a> <a href="">Customer Services</a> <a
+					href="">Promotion</a> <a href="">Top Brands</a>
+			</div>
+			<div class="col d-flex">
+				<span><i class="bx bxl-facebook-square"></i></span> <span><i
+					class="bx bxl-instagram-alt"></i></span> <span><i
+					class="bx bxl-github"></i></span> <span><i class="bx bxl-twitter"></i></span>
+				<span><i class="bx bxl-pinterest"></i></span>
+			</div>
+		</div>
+	</footer>
+	<!-- Custom Script -->
+	<script th:src="@{/js/client.js}"></script>
+	<script th:src="@{/js/validator.js}"></script>
+</body>
+</html>

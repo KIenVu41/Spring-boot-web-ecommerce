@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+	<title>Detail</title>
+</head>
+
+<body style="margin: 0;">
+	<div class="container-fluid" id="myDiv">
+		<div class="d-flex" id="wrapper">
+			<div th:replace="admin/common/sidebar :: sidebar" class="bg-white" id="sidebar-wrapper"></div>
+			<div id="page-content-wrapper">
+				<nav th:replace="admin/common/navbar :: navbar"
+					class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4"></nav>
+				<div class="container-fluid px-4">
+					<div class="row my-5">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a th:href="@{/admin/}">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Bill</li>
+								<li class="breadcrumb-item active" aria-current="page">Detail</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="row my-5">
+						<div class=" col-md-12">
+							<table class="table bg-white rounded shadow-sm  table-hover">
+								<thead>
+									<tr>
+										<th scope="col" width="50">#</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Price</th>
+										<th scope="col">Bill_id</th>
+										<th scope="col">Product_id</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="billProduct :${billProducts}">
+										<th scope="row" th:text="${billProduct.id}"></th>
+										<td th:text="${billProduct.quantity}"></td>
+										<td th:text="${billProduct.price}"></td>
+										 <td th:text="${billProduct.bill.id}"></td>
+										<td th:text="${billProduct.product.id}"></td> 
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md -12">
+							<!--Pagination-->
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<li class="page-item" th:classappend="${current == 1} ? disabled:enabled">
+										<a class="page-link" th:href = "@{'/admin/bill/detail?id=' + ${id} +'&page=' + ${current - 1}}"  tabindex="-1" aria-disabled="true">Previous</a>
+									</li>
+									<li class="page-item" th:each="i : ${#numbers.sequence(1, endPage)}" th:classappend="${i eq current} ? disabled: enabled">
+										<a th:href = "@{'/admin/bill/detail?id=' + ${id} +'&page=' + ${i}}" class="page-link" th:text="${i}"></a>
+									</li>
+									<li class="page-item">
+										<a class="page-link"th:href = "@{'/admin/bill/bill/detail?id=' + ${id} +'&page=' + ${current + 1}}">Next</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/index.js}"></script>
+</body>
+
+</html>

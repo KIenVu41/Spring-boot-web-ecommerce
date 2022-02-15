@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Box icons -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+<!-- Custom StyleSheet -->
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<title>Checkout</title>
+</head>
+<body>
+	<!-- Navigation -->
+	<div class="top-nav">
+		<div class="container d-flex">
+			<p>Order Online Or Call Us: (001) 2222-55555</p>
+			<ul class="d-flex">
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">FAQ</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="navigation">
+		<div class="nav-center container d-flex">
+			<a href="index.html" class="logo"><h1>Dans</h1></a>
+
+			<ul class="nav-list d-flex">
+				<li class="nav-item"><a th:href="@{/home}" class="nav-link">Home</a></li>
+				<li class="nav-item"><a th:href="@{/product/search}"
+					class="nav-link">Shop</a></li>
+				<li class="nav-item"><a href="#terms" class="nav-link">Terms</a>
+				</li>
+				<li class="nav-item"><a href="#about" class="nav-link">About</a>
+				</li>
+				<li class="nav-item"><a href="#contact" class="nav-link">Contact</a>
+				</li>
+				<li class="icons d-flex"><a href="login.html" class="icon">
+						<i class="bx bx-user"></i>
+				</a>
+					<div class="icon">
+						<i class="bx bx-search"></i>
+					</div>
+					<div class="icon">
+						<i class="bx bx-heart"></i> <span class="d-flex">0</span>
+					</div> <a href="cart.html" class="icon"> <i class="bx bx-cart"></i> <span
+						class="d-flex">0</span>
+				</a></li>
+			</ul>
+
+			<div class="icons d-flex">
+				<a th:href="@{/member/login}" class="icon"> <i class="bx bx-user"></i>
+				</a>
+				<div class="icon">
+					<i class="bx bx-search"></i>
+				</div>
+				<div class="icon">
+					<i class="bx bx-heart"></i> <span class="d-flex">0</span>
+				</div>
+				<a th:href="@{/cart}" class="icon"> <i class="bx bx-cart"></i> <span
+					class="d-flex" th:text= "${session.cartItems} ? ${session.cartItems} : 0"></span>
+				</a>
+			</div>
+
+			<div class="hamburger">
+				<i class="bx bx-menu-alt-left"></i>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="card">
+			<div class="payment-details">
+				<h3>Payment Details</h3>
+				<p>Complete your purchase by providing your payment details.</p>
+			</div>
+			<div class="input-text">
+				<input type="text" placeholder="@gmail.com" onblur="checkEmail(this.value)"> <span>Email</span>
+				<div id='emailField'></div> 
+			</div>
+			<div class="input-text">
+				<input type="text" placeholder="0000 0000 0000 0000" data-slots="0"
+					data-accept="\d" required> <span>Card Details</span>
+			</div>
+			<div class="input-text">
+				<input type="text" placeholder="Username" required> <span>Card
+					Holder name</span>
+			</div>
+			<div class="billing">
+				<span>Billing Address</span> <select>
+					<option>Select Country</option>
+					<option>United States</option>
+					<option>India</option>
+					<option>England</option>
+					<option>France</option>
+					<option>Germany</option>
+					<option>Japan</option>
+					<option>China</option>
+					<option>Italy</option>
+					<option>Russia</option>
+					<option>Vietnam</option>
+				</select>
+				<div class="zip-state">
+					<div class="zip">
+						<input type="text" placeholder="ZIP" required>
+					</div>
+					<div class="state">
+						<select>
+							<option>Select State</option>
+							<option>New York</option>
+							<option>New Delhi</option>
+							<option>London</option>
+							<option>Paris</option>
+							<option>Berlin</option>
+							<option>Tokyo</option>
+							<option>Bejing</option>
+							<option>Rome</option>
+							<option>Mosco</option>
+							<option>Ha Noi</option>
+							<option>Ho Chi Minh</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="input-text">
+				<input type="text" placeholder="GB0124589" required> <span>Vat
+					Number</span>
+			</div>
+			<div class="input-text">
+				<form method = "get" th:action="@{/member/coupon}">
+					<input type="text" name = "code" placeholder="BLACKWEDNESDAY" required> <span>Discount
+						code</span>
+					<button type = "submit" class = "coupon-btn">Enter code</button>
+				</form>
+				<p th:text="${param.e}" style = "color:red"></p>
+			</div>
+			<div class="summary">
+				<div class="text-data">
+					<p>Subtotal</p>
+					<p th:if="${discount != null}">Discount</p>
+					<p>VAT(20%)</p>
+					<h5>Total</h5>
+				</div>
+				<div class="numerical-data">
+					<p th:text = "${subtotal}">$</p>
+					<p th:text = "${discount}"></p>
+					<p th:text = "${vat}">$</p>
+					<h5 th:text="${total}"></h5>
+				</div>
+			</div>
+			<div class="pay">
+				<a th:href="@{/member/add-order}">Pay</a>
+			</div>
+			<div class="secure">
+				<i class="fa fa-lock"></i>
+				<p>Payments are secured and encrypted</p>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="row">
+			<div class="col d-flex">
+				<h4>INFORMATION</h4>
+				<a href="">About us</a> <a href="">Contact Us</a> <a href="">Term
+					& Conditions</a> <a href="">Shipping Guide</a>
+			</div>
+			<div class="col d-flex">
+				<h4>USEFUL LINK</h4>
+				<a href="">Online Store</a> <a href="">Customer Services</a> <a
+					href="">Promotion</a> <a href="">Top Brands</a>
+			</div>
+			<div class="col d-flex">
+				<span><i class="bx bxl-facebook-square"></i></span> <span><i
+					class="bx bxl-instagram-alt"></i></span> <span><i
+					class="bx bxl-github"></i></span> <span><i class="bx bxl-twitter"></i></span>
+				<span><i class="bx bxl-pinterest"></i></span>
+			</div>
+		</div>
+	</footer>
+	<!-- Custom Script -->
+	<script th:src="@{/js/client.js}"></script>
+	<script th:src="@{/js/validator.js}"></script>
+</body>
+</html>
